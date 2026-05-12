@@ -1,0 +1,44 @@
+pipeline {
+    agent any
+
+    tools {
+        jdk 'JDK21'
+        maven 'Maven3.9.9'
+    }
+
+    options {
+        buildDiscarder(logRotator(numToKeepStr: '10'))
+        timestamps()
+    }
+
+    stages {
+        stage('Maven打包') {
+            steps {
+                echo '开始执行Maven打包...'
+                // 执行打包命令
+                sh 'mvn clean package -Dmaven.test.skip=true'
+                echo 'Maven打包完成'
+            }
+        }
+
+        stage('归档构建产物') {
+            steps {
+                echo '开始归档JAR包...'
+                archiveArtifacts artifacts: 'target/*.jar', fingerprint: true
+                echo 'JAR包归档完成'
+            }
+        }
+    }
+
+    post {
+        success {
+            echo '✅ 构建成功！'
+        }
+        failure {
+            echo '❌ 构建失败，请查看控制台日志'
+        }
+        always {
+            echo '构建流程结束'
+        }
+    }
+}
