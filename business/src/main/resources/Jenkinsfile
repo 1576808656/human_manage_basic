@@ -12,19 +12,35 @@ pipeline {
     }
 
     stages {
+        stage('环境验证') {
+            steps {
+                echo '=== 验证构建环境 ==='
+                sh 'java -version'
+                sh 'mvn -version'
+                sh 'echo "工作空间路径: $WORKSPACE"'
+                sh 'ls -la $WORKSPACE'  // 查看工作空间文件
+            }
+        }
+
         stage('Maven打包') {
             steps {
                 echo '开始执行Maven打包...'
-                // 执行打包命令
-                sh 'mvn clean package -Dmaven.test.skip=true'
+                // 增加-X参数输出详细日志，-e参数输出错误堆栈
+                sh 'mvn clean package -Dmaven.test.skip=true -e -X'
                 echo 'Maven打包完成'
+            }
+            post {
+                failure {
+                    echo '❌ Maven打包失败！以下是target目录内容：'
+                    sh 'ls -la $WORKSPACE/target'  // 查看target目录是否生成
+                }
             }
         }
 
         stage('归档构建产物') {
             steps {
                 echo '开始归档JAR包...'
-                archiveArtifacts artifacts: 'target/*.jar', fingerprint: true
+                archiveArtifacts artifacts: 'target/*.jar', fingerprint: true, allowEmptyArchive: false
                 echo 'JAR包归档完成'
             }
         }
@@ -35,7 +51,7 @@ pipeline {
             echo '✅ 构建成功！'
         }
         failure {
-            echo '❌ 构建失败，请查看控制台日志'
+            echo '❌ 构建失败，请查看上面的详细错误日志'
         }
         always {
             echo '构建流程结束'
