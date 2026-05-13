@@ -39,9 +39,12 @@ pipeline {
 
         stage('归档构建产物') {
             steps {
-                echo '开始归档JAR包...'
-                archiveArtifacts artifacts: 'target/*.jar', fingerprint: true, allowEmptyArchive: false
-                echo 'JAR包归档完成'
+                echo '开始归档business模块可执行JAR包...'
+                archiveArtifacts(
+                    artifacts: 'business/target/*.jar',
+                    fingerprint: true,
+                    onlyIfSuccessful: true
+                )
             }
         }
     }
