@@ -5,7 +5,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>4.0.5</version>
+        <version>3.4.5</version>
         <relativePath/>
     </parent>
     <groupId>com.human</groupId>
@@ -16,15 +16,17 @@
     <packaging>pom</packaging>
     <properties>
         <java.version>21</java.version>
-        <spring-cloud.version>2025.1.1</spring-cloud.version>
+        <spring-cloud.version>2024.0.0</spring-cloud.version>
         <satoken.version>1.45.0</satoken.version>
         <mybatis.version>3.5.16</mybatis.version>
         <mysql.version>9.6.0</mysql.version>
-        <security.crypto.version>7.0.4</security.crypto.version>
+        <security.crypto.version>6.4.4</security.crypto.version>
         <lombok.version>1.18.42</lombok.version>
         <minio.version>8.6.0</minio.version>
         <feign.version>5.0.1</feign.version>
         <swagger.version>2.2.48</swagger.version>
+        <hutool.version>5.8.38</hutool.version>
+        <springdoc.version>2.8.5</springdoc.version>
     </properties>
     <dependencies>
 
@@ -76,7 +78,7 @@
             </dependency>
             <dependency>
                 <groupId>com.baomidou</groupId>
-                <artifactId>mybatis-plus-spring-boot4-starter</artifactId>
+                <artifactId>mybatis-plus-spring-boot3-starter</artifactId>
                 <version>${mybatis.version}</version>
             </dependency>
             <dependency>
@@ -105,15 +107,15 @@
                 <version>${minio.version}</version>
             </dependency>
             <dependency>
-                <groupId>org.springframework.cloud</groupId>
-                <artifactId>spring-cloud-starter-openfeign</artifactId>
-                <version>${feign.version}</version>
+                <groupId>org.springdoc</groupId>
+                <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+                <version>${springdoc.version}</version>
             </dependency>
+
             <dependency>
-                <groupId>io.swagger.core.v3</groupId>
-                <artifactId>swagger-annotations</artifactId>
-                <version>${swagger.version}</version>
-                <scope>compile</scope>
+                <groupId>cn.hutool</groupId>
+                <artifactId>hutool-all</artifactId>
+                <version>${hutool.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
@@ -129,7 +131,7 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <version>4.0.5</version>
+                <version>3.4.5</version>
                 <!-- 跳过repackage执行 -->
                 <configuration>
                     <skip>true</skip>

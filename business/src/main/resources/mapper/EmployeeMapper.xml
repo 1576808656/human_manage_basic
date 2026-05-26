@@ -12,5 +12,26 @@
         FROM employee e
         INNER JOIN department d ON d.id = e.dept_id
         INNER JOIN position p ON p.id = e.position_id AND e.dept_id = p.dept_id
+        <where>
+            <if test="dto.name != null and dto.name != ''">
+                AND e.name LIKE CONCAT('%', #{dto.name}, '%')
+            </if>
+            <if test="dto.deptId != null">
+                AND e.dept_id = #{dto.deptId}
+            </if>
+            <if test="dto.positionId != null">
+                AND e.position_id = #{dto.positionId}
+            </if>
+            <if test="dto.status != null">
+                AND e.status = #{dto.status}
+            </if>
+            <if test="dto.entryStartDate != null">
+                AND e.entry_date &gt;= #{dto.entryStartDate}
+            </if>
+            <if test="dto.entryEndDate != null">
+                AND e.entry_date &lt;= #{dto.entryEndDate}
+            </if>
+        </where>
+        ORDER BY e.id DESC
     </select>
 </mapper>

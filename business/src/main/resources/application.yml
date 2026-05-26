@@ -1,11 +1,11 @@
 spring:
   application:
-    name: human_manage_basic
+    name: basic
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    username: human_manage_basic
-    password: basic
-    url: jdbc:mysql://localhost:3306/human_manage_basic
+    username: 登录用户名
+    password: 登录密码
+    url: jdbc:mysql://localhost:3306/basic
   servlet:
     multipart:
       max-file-size: 50MB
@@ -29,6 +29,14 @@ server:
   servlet:
     context-path: /api/basic
 
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+    enabled: true
+  default-produces-media-type: application/json
+
 sa-token:
   # token 名称
   token-name: saToken
@@ -47,7 +55,7 @@ sa-token:
 
 
 minio:
-  url: http://192.168.100.147:9001
-  username: admin
-  password: admin123456
-  bucketName: human-manage
+  url: http://minioIP:端口号
+  username: minio用户名
+  password: minio密码
+  bucketName: 桶名称

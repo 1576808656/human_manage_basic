@@ -22,8 +22,6 @@ public class FileApiController implements FileApi {
     @Resource
     private MinioPojo minioPojo;
 
-    private static final String MINIO_BUCKET = "employ-manage";
-
     @Override
     @PostMapping("/common/upload")
     public ResponseDTO upload(MultipartFile file) {

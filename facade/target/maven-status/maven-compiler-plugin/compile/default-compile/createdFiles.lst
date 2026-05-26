@@ -1,0 +1,4 @@
+com\human\facade\pojo\MinioPojo.class
+com\human\facade\file\FileApi.class
+com\human\facade\config\MinioConfig.class
+com\human\facade\file\FileApiController.class

@@ -1,0 +1,20 @@
+# 开发环境配置示例
+# 使用时复制为 application-dev.yml，按实际情况修改
+
+spring:
+  datasource:
+    username: human_manage_basic
+    password: your_dev_password
+    url: jdbc:mysql://localhost:3306/human_manage_basic
+
+server:
+  port: 19500
+
+sa-token:
+  is-log: true
+
+minio:
+  url: http://localhost:9000
+  username: admin
+  password: admin123456
+  bucketName: human-manage

@@ -93,4 +93,7 @@ public class SysUserDO {
      */
     @TableField(value = "update_time", fill = FieldFill.INSERT_UPDATE)
     private LocalDateTime updateTime;
+
+    @TableField("uuid")
+    private String uuid;
 }
